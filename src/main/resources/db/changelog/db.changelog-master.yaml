@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/V1.0__create_tables.sql
+      labels: "baseline"
