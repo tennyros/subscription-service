@@ -1,0 +1,31 @@
+services:
+
+  subscription-service-db:
+    image: postgres:17-alpine
+    container_name: subscription-service-db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5433:5432"
+
+  subscription-service:
+    image: subscription-service:0.0.1
+    container_name: admin-dashboard-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_SCHEMA_NAME: ${DB_NAME}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://subscription-service-db:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8088:8008"
+    depends_on:
+      spring-boot-admin-dashboard-db:
+        condition: service_healthy
+    restart: on-failure
