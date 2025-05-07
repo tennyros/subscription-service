@@ -14,8 +14,15 @@ permissions:
   pull-requests: write
 
 jobs:
-  test-coverage:
+  build:
     runs-on: ubuntu-latest
+
+    env:
+      DB_NAME: ${{ secrets.POSTGRES_DB }}
+      DB_USERNAME: ${{ secrets.POSTGRES_USER }}
+      DB_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      DB_SERVER: localhost
+      DB_PORT: 5433
 
     services:
       postgres:
