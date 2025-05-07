@@ -9,7 +9,6 @@ on:
       - dev
       - master
 
-
 permissions:
   contents: write
   pull-requests: write
@@ -48,7 +47,7 @@ jobs:
         run: chmod +x mvnw
 
       - name: Build with Maven
-        run: ./mvnw clean -B package --file pom.xml -Dspring.profiles.active=test
+        run: ./mvnw clean -B package --file pom.xml -Dspring.profiles.active=dev
 
       - name: Send Telegram notification
         if: always()
