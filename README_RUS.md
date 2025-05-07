@@ -86,10 +86,10 @@ cp docker-compose.example.yml docker-compose.yml
 docker-compose up -d
 ```
 
-**После этого API будет доступно по адресу:**
+**4. После этого API будет доступно по адресу:**
 
 ```url
-http://localhost:8008/swagger-ui.html
+http://localhost:8088/swagger-ui.html
 ```
 
 ## CI Pipeline
