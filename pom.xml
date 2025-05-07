@@ -143,7 +143,7 @@
         <configuration>
           <excludes>
             <exclude>**/SubscriptionServiceApplication.class</exclude>
-            <exclude>**/models/**</exclude>
+            <exclude>**/model/**</exclude>
             <exclude>**/dto/**</exclude>
           </excludes>
         </configuration>

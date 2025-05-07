@@ -18,6 +18,9 @@
 | PostgreSQL                      | 17+      | Система управления базами данных         |
 | Liquibase                       | 4.31.1   | Миграции базы данных                     |
 | MapStruct                       | 1.6.3    | Маппинг объектов (DTO/Entity)            |
+| JUnit 5                         | 5.11.4   | Фреймворк для юнит-тестов                |
+| Mockito                         | 5.14.2   | Фреймворк для мокирования в юнит-тестах  |
+| JaCoCo                          | 0.8.13   | Отчеты по покрытию тестами               |
 | Springdoc OpenAPI               | 2.8.6    | Документация API (Swagger UI для Spring) |
 | Spring Cloud Netflix            | 2024.0.1 | Интеграция с Eureka (Service Discovery)  |
 
@@ -52,6 +55,7 @@ target/
 ├── generated-sources/
 │   ├── annotations/     # Автогенерируемые классы MapStruct
 │   │   └── com.github.tennyros.subscription_service.mapper/
+├── reports-report/      # Отчеты JaCoCo о покрытии
 ```
 
 ## Быстрый старт

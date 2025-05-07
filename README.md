@@ -10,7 +10,7 @@
 
 ## Tech Stack
 
-| Компонент                       | Версия   | Назначение                                  |
+| Component                       | Version  | Purpose                                     |
 |---------------------------------|----------|---------------------------------------------|
 | Spring Boot                     | 3.4.5    | Backend framework                           |
 | Hibernate ORM (Spring Data JPA) | 6.6.13   | ORM framework for Java data handling        |
@@ -18,6 +18,9 @@
 | PostgreSQL                      | 17+      | Database management system                  |
 | Liquibase                       | 4.31.1   | Database migrations                         |
 | MapStruct                       | 1.6.3    | DTO/Entity object mapping                   |
+| JUnit 5                         | 5.11.4   | Test framework for unit tests               |
+| Mockito                         | 5.14.2   | Test framework for mocking in unit tests    |
+| JaCoCo                          | 0.8.13   | Test coverage reports                       |
 | Springdoc OpenAPI               | 2.8.6    | API documentation (Swagger UI for Spring)   |
 | Spring Cloud Netflix            | 2024.0.1 | Integration with Eureka (Service Discovery) |
 
@@ -52,6 +55,7 @@ target/
 ├── generated-sources/
 │   ├── annotations/     # MapStruct auto-generated classes
 │   │   └── com.github.tennyros.subscription_service.mapper/
+├── reports-report/      # JaCoCo coverage reports
 ```
 
 ## Quick Start
