@@ -22,18 +22,19 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
-    @Mock
-    private UserRepository userRepository;
-
-    @InjectMocks
-    private UserServiceImpl userService;
-
+    private static final long ID = 1L;
     private final User testUser = User.builder()
             .email("test@example.com")
             .build();
     private final User updatedUser = User.builder()
             .email("updated@example.com")
             .build();
+
+    @Mock
+    private UserRepository userRepository;
+
+    @InjectMocks
+    private UserServiceImpl userService;
 
     @Test
     void createUser_shouldSaveAndReturnUser() {
@@ -47,41 +48,50 @@ class UserServiceTest {
 
     @Test
     void getUserById_shouldReturnUserWhenExists() {
-        when(userRepository.findWithSubscriptionsById(1L))
+        when(userRepository.findWithSubscriptionsById(ID))
                 .thenReturn(Optional.of(testUser));
 
-        User result = userService.getUserById(1L);
+        User result = userService.getUserById(ID);
 
         assertThat(result).isEqualTo(testUser);
     }
 
     @Test
     void getUserById_shouldThrowWhenNotFound() {
-        when(userRepository.findWithSubscriptionsById(1L))
+        when(userRepository.findWithSubscriptionsById(ID))
                 .thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> userService.getUserById(1L))
+        assertThatThrownBy(() -> userService.getUserById(ID))
                 .isInstanceOf(UserNotFoundException.class)
                 .hasMessage("User not found");
     }
 
     @Test
     void updateUser_shouldUpdateExistingUser() {
-        when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
+        when(userRepository.findById(ID)).thenReturn(Optional.of(testUser));
         when(userRepository.save(any(User.class))).thenReturn(updatedUser);
 
-        User result = userService.updateUser(1L, updatedUser);
+        User result = userService.updateUser(ID, updatedUser);
 
         assertThat(result.getEmail()).isEqualTo("updated@example.com");
         verify(userRepository).save(testUser);
     }
 
     @Test
+    void updateUser_shouldThrowIfExists() {
+        when(userRepository.findById(ID)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> userService.updateUser(ID, updatedUser))
+                .isInstanceOf(UserNotFoundException.class)
+                .hasMessage("User not found");
+    }
+
+    @Test
     void deleteUser_shouldCallRepository() {
-        doNothing().when(userRepository).deleteById(1L);
+        doNothing().when(userRepository).deleteById(ID);
 
-        userService.deleteUser(1L);
+        userService.deleteUser(ID);
 
-        verify(userRepository).deleteById(1L);
+        verify(userRepository).deleteById(ID);
     }
 }
