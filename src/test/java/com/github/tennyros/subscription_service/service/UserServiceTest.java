@@ -80,7 +80,7 @@ class UserServiceTest {
 
     @Test
     void updateUser_shouldUpdateExistingUser() {
-        when(userRepository.findById(ID)).thenReturn(Optional.of(testUser));
+        when(userRepository.findWithSubscriptionsById(ID)).thenReturn(Optional.of(testUser));
         when(userRepository.save(any(User.class))).thenReturn(updatedUser);
 
         User result = userService.updateUser(ID, updatedUser);
@@ -91,7 +91,7 @@ class UserServiceTest {
 
     @Test
     void updateUser_shouldThrowIfExists() {
-        when(userRepository.findById(ID)).thenReturn(Optional.empty());
+        when(userRepository.findWithSubscriptionsById(ID)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> userService.updateUser(ID, updatedUser))
                 .isInstanceOf(UserNotFoundException.class)
