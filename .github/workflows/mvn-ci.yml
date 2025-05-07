@@ -17,20 +17,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      DB_NAME: ${{ secrets.POSTGRES_DB }}
-      DB_USERNAME: ${{ secrets.POSTGRES_USER }}
-      DB_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-      DB_SERVER: localhost
-      DB_PORT: 5433
-
     services:
       postgres:
         image: postgres:17-alpine
         env:
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: subscription_service_app
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: root
         ports:
           - 5433:5432
         options: >-
