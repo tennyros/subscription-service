@@ -19,7 +19,7 @@
 | Liquibase                       | 4.31.1   | Database migrations                         |
 | MapStruct                       | 1.6.3    | DTO/Entity object mapping                   |
 | Springdoc OpenAPI               | 2.8.6    | API documentation (Swagger UI for Spring)   |
-| Spring Cloud Netflix	           | 2024.0.1 | Integration with Eureka (Service Discovery) |
+| Spring Cloud Netflix            | 2024.0.1 | Integration with Eureka (Service Discovery) |
 
 ## Project Structure
 
