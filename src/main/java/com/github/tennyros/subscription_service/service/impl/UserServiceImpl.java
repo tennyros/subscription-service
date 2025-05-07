@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(Long id, User user) {
-        User existingUser = userRepository.findById(id)
+        User existingUser = userRepository.findWithSubscriptionsById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
         existingUser.setEmail(user.getEmail());
         return userRepository.save(existingUser);
