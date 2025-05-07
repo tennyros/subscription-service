@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Schema(description = "Request payload for subscription")
-public record SubRequest(
+public record SubscriptionRequest(
 
         @Schema(description = "Name of the subscription", example = "VK music", minLength = 2, maxLength = 64)
         @NotBlank(message = "Service name must be defined") @Size(min = 2, max = 64, message = "Service name is invalid")

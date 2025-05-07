@@ -3,7 +3,7 @@ package com.github.tennyros.subscription_service.dto.response;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Top subscriptions response")
-public record TopSubs(
+public record TopSubscriptions(
 
         @Schema(description = "Service name", example = "VK music")
         String serviceName,

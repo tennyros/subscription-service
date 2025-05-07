@@ -16,7 +16,7 @@ public record UserResponse(
         String email,
 
         @Schema(description = "Users subscription list")
-        List<SubResponse> subscriptions
+        List<SubscriptionResponse> subscriptions
 
 ) {
 }

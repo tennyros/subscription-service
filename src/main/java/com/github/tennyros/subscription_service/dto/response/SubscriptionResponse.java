@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @Schema(description = "Subscription information response")
-public record SubResponse(
+public record SubscriptionResponse(
 
         @Schema(description = "Unique subscription identifier", example = "123", requiredMode = REQUIRED)
         Long id,
