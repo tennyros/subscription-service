@@ -12,7 +12,7 @@ services:
 
   subscription-service:
     image: subscription-service:0.0.1
-    container_name: admin-dashboard-app
+    container_name: subscription-service
     build:
       context: .
       dockerfile: Dockerfile
