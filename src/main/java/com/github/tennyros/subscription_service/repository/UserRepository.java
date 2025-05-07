@@ -13,4 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @EntityGraph(attributePaths = {"subscriptions"})
     Optional<User> findWithSubscriptionsById(Long id);
 
+    boolean existsByEmail(String email);
 }
