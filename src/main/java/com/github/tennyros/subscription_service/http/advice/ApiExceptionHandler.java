@@ -1,5 +1,7 @@
 package com.github.tennyros.subscription_service.http.advice;
 
+import com.github.tennyros.subscription_service.excepton.InvalidServiceException;
+import com.github.tennyros.subscription_service.excepton.SubscriptionNotFoundException;
 import com.github.tennyros.subscription_service.excepton.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.net.URI;
@@ -21,10 +22,21 @@ import java.util.Map;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ProblemDetail handleUserNotFound(UserNotFoundException ex, HttpServletRequest request) {
         log.error("User not found: {}", ex.getMessage());
         return buildProblemDetail(HttpStatus.NOT_FOUND, ex.getMessage(), "Not found", request);
+    }
+
+    @ExceptionHandler(SubscriptionNotFoundException.class)
+    public ProblemDetail handleSubscriptionNotFound(SubscriptionNotFoundException ex, HttpServletRequest request) {
+        log.error("Subscription not found: {}", ex.getMessage());
+        return buildProblemDetail(HttpStatus.NOT_FOUND, ex.getMessage(), "Not found", request);
+    }
+
+    @ExceptionHandler(InvalidServiceException.class)
+    public ProblemDetail handleInvalidService(InvalidServiceException ex, HttpServletRequest request) {
+        log.error("Such subscription service does not exist: {}", ex.getMessage());
+        return buildProblemDetail(HttpStatus.BAD_REQUEST, ex.getMessage(), "Bad request", request);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
