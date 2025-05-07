@@ -14,7 +14,7 @@
 |---------------------------------|----------|---------------------------------------------|
 | Spring Boot                     | 3.4.5    | Backend framework                           |
 | Hibernate ORM (Spring Data JPA) | 6.6.13   | ORM framework for Java data handling        |
-| Maven (обертка)                 | 3.9.9    | Project build tool                          |
+| Maven (wrapper)                 | 3.9.9    | Project build tool                          |
 | PostgreSQL                      | 17+      | Database management system                  |
 | Liquibase                       | 4.31.1   | Database migrations                         |
 | MapStruct                       | 1.6.3    | DTO/Entity object mapping                   |
