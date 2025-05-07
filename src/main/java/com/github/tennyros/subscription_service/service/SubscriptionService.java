@@ -1,11 +1,11 @@
 package com.github.tennyros.subscription_service.service;
 
 import com.github.tennyros.subscription_service.model.Subscription;
-import com.github.tennyros.subscription_service.repository.projection.TopSubsProjection;
+import com.github.tennyros.subscription_service.repository.projection.TopSubscriptionsProjection;
 
 import java.util.List;
 
-public interface SubService {
+public interface SubscriptionService {
 
     Subscription addSubscription(Long userId, Subscription sub);
 
@@ -13,6 +13,6 @@ public interface SubService {
 
     void deleteUserSubscription(Long userId, Long subscriptionId);
 
-    List<TopSubsProjection> getTop3Subs();
+    List<TopSubscriptionsProjection> getTop3Subs();
 
 }
