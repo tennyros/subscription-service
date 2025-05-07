@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User getUserById(Long id) {
-        return userRepository.findById(id)
+        return userRepository.findWithSubscriptionsById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
