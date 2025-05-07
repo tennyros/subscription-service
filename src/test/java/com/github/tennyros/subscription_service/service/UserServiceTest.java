@@ -1,5 +1,6 @@
 package com.github.tennyros.subscription_service.service;
 
+import com.github.tennyros.subscription_service.excepton.UserAlreadyExistsException;
 import com.github.tennyros.subscription_service.excepton.UserNotFoundException;
 import com.github.tennyros.subscription_service.model.User;
 import com.github.tennyros.subscription_service.repository.UserRepository;
@@ -14,8 +15,10 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -44,6 +47,15 @@ class UserServiceTest {
 
         assertThat(result).isEqualTo(testUser);
         verify(userRepository).save(testUser);
+    }
+
+    @Test
+    void createUser_shouldThrowUserAlreadyExist() {
+        when(userRepository.existsByEmail("test@example.com")).thenReturn(true);
+
+        assertThrows(UserAlreadyExistsException.class, () -> userService.createUser(testUser));
+
+        verify(userRepository, never()).save(any());
     }
 
     @Test
