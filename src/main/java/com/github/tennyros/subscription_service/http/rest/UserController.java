@@ -8,6 +8,7 @@ import com.github.tennyros.subscription_service.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +59,9 @@ public class UserController {
         UserResponse response = userMapper.toResponse(updatedUser);
         log.debug("Updated user with ID: {}", id);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
     }
 
     @DeleteMapping("/{id}")
