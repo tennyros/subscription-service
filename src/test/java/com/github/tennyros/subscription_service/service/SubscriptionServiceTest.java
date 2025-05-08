@@ -3,6 +3,7 @@ package com.github.tennyros.subscription_service.service;
 import com.github.tennyros.subscription_service.dto.response.TopSubscriptions;
 import com.github.tennyros.subscription_service.excepton.InvalidServiceException;
 import com.github.tennyros.subscription_service.excepton.SubscriptionNotFoundException;
+import com.github.tennyros.subscription_service.excepton.SuchUsersSubscriptionAlreadyExists;
 import com.github.tennyros.subscription_service.excepton.UserNotFoundException;
 import com.github.tennyros.subscription_service.model.Subscription;
 import com.github.tennyros.subscription_service.model.User;
@@ -80,6 +81,30 @@ class SubscriptionServiceTest {
 
         verify(userRepository).findById(ID);
         verifyNoMoreInteractions(userRepository);
+    }
+
+    @Test
+    void addSubscription_throwsSuchUsersSubscriptionAlreadyExists_whenSubscriptionAlreadyExists() {
+        String serviceName = "Netflix";
+
+        Subscription existingSub = new Subscription();
+        existingSub.setServiceName(serviceName);
+
+        Subscription newSub = new Subscription();
+        newSub.setServiceName(serviceName);
+
+        User user = new User();
+        user.setId(ID);
+        user.setSubscriptions(List.of(existingSub));
+
+        when(userRepository.findById(ID)).thenReturn(Optional.of(user));
+
+        assertThrows(SuchUsersSubscriptionAlreadyExists.class, () -> {
+            subscriptionService.addSubscription(ID, newSub);
+        });
+
+        verify(userRepository).findById(ID);
+        verifyNoMoreInteractions(subscriptionRepository);
     }
 
     @Test
