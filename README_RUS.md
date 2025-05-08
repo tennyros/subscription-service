@@ -1,6 +1,7 @@
 # Subscription Service
 
 ![CI Status](https://github.com/tennyros/subscription-service/workflows/CI%20Pipeline%20with%20Maven/badge.svg)
+![Coverage](https://github.com/tennyros/subscription-service/raw/coverage-badge/.github/badges/jacoco.svg)
 ![Java 17](https://img.shields.io/badge/Java-17-blue)
 ![Spring Boot 3.4.5](https://img.shields.io/badge/Spring_Boot-3.4.5-brightgreen)
 
@@ -48,6 +49,13 @@
 │       ├── application.yml               # Основная конфигурация
 │       └── application-dev.yml           # Конфиг для разработки
 ├── test/                                 # Тесты
+│   ├── java/
+│   │   └── com/github/tennyros/subscription_service/
+│   │       ├── controller/       # Юнит/интеграционные тесты контроллер слоя
+│   │       ├── mapper/           # Юнит тесты мапперов
+│   │       └── service/          # Юнит тесты бизнес слоя
+│   └── resources/
+│       └── application-test.yml  # Конфигурация для тестирования
 pom.xml
 
 Собранные артефакты:

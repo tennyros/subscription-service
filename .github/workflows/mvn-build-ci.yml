@@ -14,7 +14,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  build:
+  test-coverage:
     runs-on: ubuntu-latest
 
     services:
@@ -48,6 +48,44 @@ jobs:
 
       - name: Build with Maven
         run: ./mvnw clean -B package --file pom.xml -Dspring.profiles.active=dev
+
+      - name: Switch to coverage-badge branch
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git fetch origin coverage-badge || echo "Branch not found, creating a new one"
+          if git rev-parse --verify origin/coverage-badge; then
+            echo "Branch 'coverage-badge' exists, switching to it."
+            git checkout coverage-badge
+          else
+            echo "Branch 'coverage-badge' does not exist, creating and switching to it."
+            git checkout --orphan coverage-badge
+          fi
+
+      - name: Generate coverage badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          jacoco-csv-file: target/jacoco-report/jacoco.csv
+          badges-directory: .github/badges
+
+      - name: Commit and push badge (only if changed)
+        run: |
+          git add .github/badges/jacoco.svg
+          git status
+          
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update test coverage badge"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/tennyros/subscription-service.git coverage-badge --force
+          fi
+
+      - name: Upload Jacoco coverage report
+        if: github.actor != 'nektos/act' # check for local GitHub act
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/jacoco-report/
 
       - name: Send Telegram notification
         if: always()

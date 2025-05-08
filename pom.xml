@@ -24,12 +24,9 @@
     <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
     <spring-cloud.version>2024.0.1</spring-cloud.version>
     <jacoco.plugin>0.8.13</jacoco.plugin>
-    <!--    target for instructions 0.8    -->
-    <jacoco.instructions.cov>0.0</jacoco.instructions.cov>
-    <!--    target for branches 0.7    -->
-    <jacoco.branch.cov>0.0</jacoco.branch.cov>
-    <!--    target for lines 0.75    -->
-    <jacoco.line.cov>0.0</jacoco.line.cov>
+    <jacoco.instructions.cov>0.75</jacoco.instructions.cov>
+    <jacoco.branch.cov>0.7</jacoco.branch.cov>
+    <jacoco.line.cov>0.75</jacoco.line.cov>
   </properties>
 
   <dependencies>

@@ -1,6 +1,7 @@
 # Subscription Service
 
 ![CI Status](https://github.com/tennyros/subscription-service/workflows/CI%20Pipeline%20with%20Maven/badge.svg)
+![Coverage](https://github.com/tennyros/subscription-service/raw/coverage-badge/.github/badges/jacoco.svg)
 ![Java 17](https://img.shields.io/badge/Java-17-blue)
 ![Spring Boot 3.4.5](https://img.shields.io/badge/Spring_Boot-3.4.5-brightgreen)
 
@@ -48,6 +49,13 @@ Source code structure (branch: dev):
 │       ├── application.yml               # Main configuration
 │       └── application-dev.yml           # Development configuration
 ├── test/                                 # Tests
+│   ├── java/
+│   │   └── com/github/tennyros/subscription_service/
+│   │       ├── controller/       # Controller layer unit/integration tests
+│   │       ├── mapper/           # Mapper unit tests
+│   │       └── service/          # Service layer unit tests
+│   └── resources/
+│       └── application-test.yml  # Test configuration
 pom.xml
 
 Built artifacts:
