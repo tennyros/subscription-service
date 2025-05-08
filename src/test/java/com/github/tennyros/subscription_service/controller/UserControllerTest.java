@@ -1,4 +1,4 @@
-package com.github.tennyros.subscription_service.http.rest;
+package com.github.tennyros.subscription_service.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tennyros.subscription_service.dto.request.UserRequest;
@@ -116,6 +116,5 @@ class UserControllerTest {
 
         verify(userService, times(1)).deleteUser(ID);
     }
-
 
 }
