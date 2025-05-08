@@ -104,6 +104,31 @@ docker-compose up -d
 http://localhost:8088/swagger-ui.html
 ```
 
+## API эндпоинты
+
+### Пользователи
+
+```http
+POST   /users        - Создать нового пользователя
+GET    /users/{id}   - Получить пользователя по ID
+PUT    /users/{id}   - Обновить пользователя по ID
+DELETE /users/{id}   - Удалить пользователя по ID
+```
+
+### Подписки
+
+```http
+POST   /users/{id}/subscriptions            - Добавить подписку пользователю
+GET    /users/{id}/subscriptions            - Получить список подписок пользователя
+DELETE /users/{id}/subscriptions/{sub_id}   - Удалить подписку по ID
+```
+
+### Общие
+
+```http
+GET /subscriptions/top   - Получить ТОП-3 самых популярных подписок
+```
+
 ## CI Pipeline
 
 ```text
