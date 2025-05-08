@@ -1,4 +1,4 @@
-package com.github.tennyros.subscription_service.controller;
+package com.github.tennyros.subscription_service.http.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tennyros.subscription_service.dto.request.UserRequest;
@@ -51,7 +51,7 @@ class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void createUser_returns201Created() throws Exception {
+    void createUser_returns201Created_whenValidRequest() throws Exception {
 
         UserRequest userRequest = new UserRequest(TEST_EMAIL);
         User userEntity = new User(ID, TEST_EMAIL, new ArrayList<>());
@@ -75,7 +75,7 @@ class UserControllerTest {
     }
 
     @Test
-    void getUser_returnsUserResponse() throws Exception {
+    void getUser_returnsUserResponse_whenUserExists() throws Exception {
         User user = new User(ID, TEST_EMAIL, new ArrayList<>());
         UserResponse userResponse = new UserResponse(ID, TEST_EMAIL, new ArrayList<>());
 
@@ -89,7 +89,7 @@ class UserControllerTest {
     }
 
     @Test
-    void updateUser_returnsUpdatedUserResponse() throws Exception {
+    void updateUser_returnsUpdatedUserResponse_whenUserExists() throws Exception {
         UserRequest userRequest = new UserRequest(UPDATED_EMAIL);
         User updatedUser = new User(ID, UPDATED_EMAIL, new ArrayList<>());
         UserResponse userResponse = new UserResponse(ID, UPDATED_EMAIL, new ArrayList<>());
@@ -108,7 +108,7 @@ class UserControllerTest {
     }
 
     @Test
-    void deleteUser_returnsNoContent() throws Exception {
+    void deleteUser_returnsNoContent_whenUserExists() throws Exception {
         doNothing().when(userService).deleteUser(ID);
 
         mockMvc.perform(delete("/api/v1/users/{id}", ID))

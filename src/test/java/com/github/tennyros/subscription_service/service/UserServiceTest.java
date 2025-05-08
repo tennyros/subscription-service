@@ -40,7 +40,7 @@ class UserServiceTest {
     private UserServiceImpl userService;
 
     @Test
-    void createUser_shouldSaveAndReturnUser() {
+    void createUser_returnsSavedUser_whenValid() {
         when(userRepository.save(any(User.class))).thenReturn(testUser);
 
         User result = userService.createUser(testUser);
@@ -50,7 +50,7 @@ class UserServiceTest {
     }
 
     @Test
-    void createUser_shouldThrowUserAlreadyExist() {
+    void createUser_throwsException_whenUserAlreadyExists() {
         when(userRepository.existsByEmail("test@example.com")).thenReturn(true);
 
         assertThrows(UserAlreadyExistsException.class, () -> userService.createUser(testUser));
@@ -59,7 +59,7 @@ class UserServiceTest {
     }
 
     @Test
-    void getUserById_shouldReturnUserWhenExists() {
+    void getUserById_returnsUser_whenUserExists() {
         when(userRepository.findWithSubscriptionsById(ID))
                 .thenReturn(Optional.of(testUser));
 
@@ -69,7 +69,7 @@ class UserServiceTest {
     }
 
     @Test
-    void getUserById_shouldThrowWhenNotFound() {
+    void getUserById_throwsException_whenUserNotFound() {
         when(userRepository.findWithSubscriptionsById(ID))
                 .thenReturn(Optional.empty());
 
@@ -79,7 +79,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser_shouldUpdateExistingUser() {
+    void updateUser_returnsUpdatedUser_whenUserExists() {
         when(userRepository.findWithSubscriptionsById(ID)).thenReturn(Optional.of(testUser));
         when(userRepository.save(any(User.class))).thenReturn(updatedUser);
 
@@ -90,7 +90,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser_shouldThrowIfExists() {
+    void updateUser_throwsException_whenUserAlreadyExists() {
         when(userRepository.findWithSubscriptionsById(ID)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> userService.updateUser(ID, updatedUser))
@@ -99,7 +99,7 @@ class UserServiceTest {
     }
 
     @Test
-    void deleteUser_shouldCallRepository() {
+    void deleteUser_callsRepository_whenUserExists() {
         doNothing().when(userRepository).deleteById(ID);
 
         userService.deleteUser(ID);
