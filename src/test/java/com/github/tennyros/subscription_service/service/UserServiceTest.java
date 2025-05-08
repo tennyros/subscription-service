@@ -75,7 +75,7 @@ class UserServiceTest {
 
         assertThatThrownBy(() -> userService.getUserById(ID))
                 .isInstanceOf(UserNotFoundException.class)
-                .hasMessage("User not found");
+                .hasMessage("User with ID 1 not found");
     }
 
     @Test
@@ -95,11 +95,13 @@ class UserServiceTest {
 
         assertThatThrownBy(() -> userService.updateUser(ID, updatedUser))
                 .isInstanceOf(UserNotFoundException.class)
-                .hasMessage("User not found");
+                .hasMessage("User with ID 1 not found");
     }
 
     @Test
     void deleteUser_callsRepository_whenUserExists() {
+        when(userRepository.existsById(ID)).thenReturn(true);
+
         doNothing().when(userRepository).deleteById(ID);
 
         userService.deleteUser(ID);

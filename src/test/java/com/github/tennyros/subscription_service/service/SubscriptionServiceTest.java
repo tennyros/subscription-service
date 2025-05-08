@@ -66,7 +66,7 @@ class SubscriptionServiceTest {
         InvalidServiceException ex = assertThrows(InvalidServiceException.class,
                 () -> subscriptionService.addSubscription(ID, sampleSubscription));
 
-        assertEquals("Such subscription service does not exist", ex.getMessage());
+        assertEquals("Such UnknownService subscription service does not exist", ex.getMessage());
         verifyNoInteractions(userRepository);
         verifyNoInteractions(subscriptionRepository);
     }
@@ -85,6 +85,8 @@ class SubscriptionServiceTest {
     @Test
     void getUserSubscriptions_returnsSubscriptions_whenUserExists() {
         List<Subscription> list = List.of(sampleSubscription);
+
+        when(userRepository.existsById(ID)).thenReturn(true);
         when(subscriptionRepository.findByUserId(ID)).thenReturn(list);
 
         List<Subscription> result = subscriptionService.getUserSubscriptions(ID);
@@ -95,6 +97,7 @@ class SubscriptionServiceTest {
 
     @Test
     void deleteSubscription_returnsNoContent_whenSuccessful() {
+        when(userRepository.existsById(ID)).thenReturn(true);
         when(subscriptionRepository.deleteByIdAndUserId(ID, ID)).thenReturn(1);
 
         subscriptionService.deleteUserSubscription(ID, ID);
@@ -104,6 +107,7 @@ class SubscriptionServiceTest {
 
     @Test
     void deleteUserSubscription_throwsException_whenNotFound() {
+        when(userRepository.existsById(ID)).thenReturn(true);
         when(subscriptionRepository.deleteByIdAndUserId(ID, ID)).thenReturn(0);
 
         assertThrows(SubscriptionNotFoundException.class,
