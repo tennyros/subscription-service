@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:${DB_BASE:postgresql}://${DB_SERVER:localhost}:${DB_PORT:5433}/${DB_NAME:subscription_service_app}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:root}
+  liquibase:
+    enabled: false
