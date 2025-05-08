@@ -7,6 +7,7 @@ import com.github.tennyros.subscription_service.mapper.SubscriptionMapper;
 import com.github.tennyros.subscription_service.model.Subscription;
 import com.github.tennyros.subscription_service.service.SubscriptionService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -71,7 +72,8 @@ public class UserSubscriptionController {
             description = "Get all subscriptions for user",
             responses = {
                     @ApiResponse(responseCode = "200", description = "List of subscriptions",
-                            content = @Content(schema = @Schema(implementation = SubscriptionResponse.class))),
+                            content = @Content(array = @ArraySchema(
+                                    schema = @Schema(implementation = SubscriptionResponse.class)))),
                     @ApiResponse(responseCode = "404", description = "User not found",
                             content = @Content(mediaType = "application/problem+json",
                                     schema = @Schema(implementation = ProblemDetail.class)))

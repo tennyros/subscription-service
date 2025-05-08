@@ -1,4 +1,4 @@
-package com.github.tennyros.subscription_service.excepton;
+package com.github.tennyros.subscription_service.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
 

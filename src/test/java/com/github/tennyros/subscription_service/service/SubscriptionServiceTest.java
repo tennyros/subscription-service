@@ -1,10 +1,10 @@
 package com.github.tennyros.subscription_service.service;
 
 import com.github.tennyros.subscription_service.dto.response.TopSubscriptions;
-import com.github.tennyros.subscription_service.excepton.InvalidServiceException;
-import com.github.tennyros.subscription_service.excepton.SubscriptionNotFoundException;
-import com.github.tennyros.subscription_service.excepton.SuchUsersSubscriptionAlreadyExists;
-import com.github.tennyros.subscription_service.excepton.UserNotFoundException;
+import com.github.tennyros.subscription_service.exception.InvalidServiceException;
+import com.github.tennyros.subscription_service.exception.SubscriptionNotFoundException;
+import com.github.tennyros.subscription_service.exception.SuchUsersSubscriptionAlreadyExists;
+import com.github.tennyros.subscription_service.exception.UserNotFoundException;
 import com.github.tennyros.subscription_service.model.Subscription;
 import com.github.tennyros.subscription_service.model.User;
 import com.github.tennyros.subscription_service.repository.SubscriptionRepository;

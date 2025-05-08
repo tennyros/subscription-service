@@ -1,7 +1,7 @@
 package com.github.tennyros.subscription_service.service.impl;
 
-import com.github.tennyros.subscription_service.excepton.UserAlreadyExistsException;
-import com.github.tennyros.subscription_service.excepton.UserNotFoundException;
+import com.github.tennyros.subscription_service.exception.UserAlreadyExistsException;
+import com.github.tennyros.subscription_service.exception.UserNotFoundException;
 import com.github.tennyros.subscription_service.model.User;
 import com.github.tennyros.subscription_service.repository.UserRepository;
 import com.github.tennyros.subscription_service.service.UserService;

@@ -1,10 +1,10 @@
 package com.github.tennyros.subscription_service.http.advice;
 
-import com.github.tennyros.subscription_service.excepton.InvalidServiceException;
-import com.github.tennyros.subscription_service.excepton.SubscriptionNotFoundException;
-import com.github.tennyros.subscription_service.excepton.SuchUsersSubscriptionAlreadyExists;
-import com.github.tennyros.subscription_service.excepton.UserAlreadyExistsException;
-import com.github.tennyros.subscription_service.excepton.UserNotFoundException;
+import com.github.tennyros.subscription_service.exception.InvalidServiceException;
+import com.github.tennyros.subscription_service.exception.SubscriptionNotFoundException;
+import com.github.tennyros.subscription_service.exception.SuchUsersSubscriptionAlreadyExists;
+import com.github.tennyros.subscription_service.exception.UserAlreadyExistsException;
+import com.github.tennyros.subscription_service.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
