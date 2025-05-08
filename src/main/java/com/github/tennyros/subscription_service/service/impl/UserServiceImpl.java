@@ -28,19 +28,22 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public User getUserById(Long id) {
         return userRepository.findWithSubscriptionsById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Override
     public User updateUser(Long id, User user) {
         User existingUser = userRepository.findWithSubscriptionsById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(id));
         existingUser.setEmail(user.getEmail());
         return userRepository.save(existingUser);
     }
 
     @Override
     public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new UserNotFoundException(id);
+        }
         userRepository.deleteById(id);
     }
 }

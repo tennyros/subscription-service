@@ -82,7 +82,7 @@ git clone https://github.com/tennyros/subscription-service.git
 cd subscription-service
 ```
 
-**2. Copy the .env file and edit credentials if needed:**
+**2. Copy the .env:**
 
 ```bash
 cp .env.example .env
@@ -91,7 +91,7 @@ cp .env.example .env
 **3. Start the application and PostgreSQL using Docker:**
 
 ```bash
-# Copy the example configuration (if not already set)
+# Copy docker-compose.yml file
 cp docker-compose.example.yml docker-compose.yml  
 
 # Start containers

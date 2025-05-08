@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users
 --comment: Add table and column comments for users
 COMMENT ON TABLE users IS 'Stores user profile information and subscriptions';
 COMMENT ON COLUMN users.id IS 'Primary key, auto-incremented';
-COMMENT ON COLUMN users.email IS 'Unique email address for authentication';
+COMMENT ON COLUMN users.email IS 'Unique email address';
 
 --changeset vadim:3
 --comment: Create subscriptions information table

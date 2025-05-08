@@ -32,11 +32,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public Subscription addSubscription(Long userId, Subscription subscription) {
 
         if (!allowedServices.contains(subscription.getServiceName())) {
-            throw new InvalidServiceException("Such subscription service does not exist");
+            throw new InvalidServiceException("Such %s subscription service does not exist"
+                    .formatted(subscription.getServiceName()));
         }
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(userId));
         subscription.setUser(user);
         return subscriptionRepository.save(subscription);
     }
@@ -45,14 +46,23 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     @Transactional(readOnly = true)
     public List<Subscription> getUserSubscriptions(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException(userId);
+        }
         return subscriptionRepository.findByUserId(userId);
     }
 
     @Override
     public void deleteUserSubscription(Long userId, Long subscriptionId) {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException(userId);
+        }
+
         int deleted = subscriptionRepository.deleteByIdAndUserId(subscriptionId, userId);
+
         if (deleted == 0) {
-            throw new SubscriptionNotFoundException("Subscription not found");
+            throw new SubscriptionNotFoundException("Subscription with ID %d for user with ID %d not found"
+                    .formatted(subscriptionId, userId));
         }
     }
 
