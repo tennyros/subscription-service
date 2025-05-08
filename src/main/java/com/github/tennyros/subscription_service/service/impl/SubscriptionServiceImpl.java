@@ -3,6 +3,7 @@ package com.github.tennyros.subscription_service.service.impl;
 import com.github.tennyros.subscription_service.dto.response.TopSubscriptions;
 import com.github.tennyros.subscription_service.excepton.InvalidServiceException;
 import com.github.tennyros.subscription_service.excepton.SubscriptionNotFoundException;
+import com.github.tennyros.subscription_service.excepton.SuchUsersSubscriptionAlreadyExists;
 import com.github.tennyros.subscription_service.excepton.UserNotFoundException;
 import com.github.tennyros.subscription_service.model.Subscription;
 import com.github.tennyros.subscription_service.model.User;
@@ -38,6 +39,15 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
+
+        boolean alreadyExists = user.getSubscriptions().stream()
+                .anyMatch(s -> s.getServiceName().equalsIgnoreCase(subscription.getServiceName()));
+
+        if (alreadyExists) {
+            throw new SuchUsersSubscriptionAlreadyExists("User already has %s subscription"
+                    .formatted(subscription.getServiceName()));
+        }
+
         subscription.setUser(user);
         return subscriptionRepository.save(subscription);
     }

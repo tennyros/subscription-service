@@ -2,6 +2,7 @@ package com.github.tennyros.subscription_service.http.advice;
 
 import com.github.tennyros.subscription_service.excepton.InvalidServiceException;
 import com.github.tennyros.subscription_service.excepton.SubscriptionNotFoundException;
+import com.github.tennyros.subscription_service.excepton.SuchUsersSubscriptionAlreadyExists;
 import com.github.tennyros.subscription_service.excepton.UserAlreadyExistsException;
 import com.github.tennyros.subscription_service.excepton.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,7 +43,13 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ProblemDetail handleUserAlreadyExists(UserAlreadyExistsException ex, HttpServletRequest request) {
-        log.error("Failed to create user: {}", ex.getMessage());
+        log.error("User with such email already exists: {}", ex.getMessage());
+        return buildProblemDetail(HttpStatus.CONFLICT, ex.getMessage(), "Conflict", request);
+    }
+
+    @ExceptionHandler(SuchUsersSubscriptionAlreadyExists.class)
+    public ProblemDetail handleSubscriptionAlreadyExists(SuchUsersSubscriptionAlreadyExists ex, HttpServletRequest request) {
+        log.error("User already have such subscription: {}", ex.getMessage());
         return buildProblemDetail(HttpStatus.CONFLICT, ex.getMessage(), "Conflict", request);
     }
 
