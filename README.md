@@ -71,7 +71,7 @@ target/
 ### Requirements
 
 1. **Java 17+**
-2. **Docker и Docker-compose**
+2. **Docker and Docker-compose**
 
 ### Setup
 

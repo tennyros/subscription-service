@@ -17,7 +17,7 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
             SELECT new com.github.tennyros.subscription_service.dto.response.TopSubscriptions(
                 s.serviceName, COUNT(s))
             FROM Subscription s GROUP BY s.serviceName
-            ORDER BY COUNT(s) DESC
+            ORDER BY COUNT(s) DESC LIMIT 3
     """)
     List<TopSubscriptions> findTop3PopularSubscriptions();
 
