@@ -49,7 +49,7 @@ class SubscriptionServiceTest {
 
 
     @Test
-    void addSubscription_validService_savesAndReturnsSubscription() {
+    void addSubscription_returnsSubscription_whenServiceIsValid() {
         when(userRepository.findById(ID)).thenReturn(Optional.of(sampleUser));
         when(subscriptionRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
 
@@ -60,7 +60,7 @@ class SubscriptionServiceTest {
     }
 
     @Test
-    void addSubscription_invalidService_throwsException() {
+    void addSubscription_throwsException_whenServiceIsInvalid() {
         sampleSubscription.setServiceName("UnknownService");
 
         InvalidServiceException ex = assertThrows(InvalidServiceException.class,
@@ -72,7 +72,7 @@ class SubscriptionServiceTest {
     }
 
     @Test
-    void addSubscription_userNotFound_throwsException() {
+    void addSubscription_throwsException_whenUserNotFound() {
         when(userRepository.findById(ID)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class,
@@ -83,7 +83,7 @@ class SubscriptionServiceTest {
     }
 
     @Test
-    void getUserSubscriptions_returnsSubscriptions() {
+    void getUserSubscriptions_returnsSubscriptions_whenUserExists() {
         List<Subscription> list = List.of(sampleSubscription);
         when(subscriptionRepository.findByUserId(ID)).thenReturn(list);
 
@@ -94,7 +94,7 @@ class SubscriptionServiceTest {
     }
 
     @Test
-    void deleteUserSubscription_successfullyDeletes() {
+    void deleteSubscription_returnsNoContent_whenSuccessful() {
         when(subscriptionRepository.deleteByIdAndUserId(ID, ID)).thenReturn(1);
 
         subscriptionService.deleteUserSubscription(ID, ID);
@@ -103,7 +103,7 @@ class SubscriptionServiceTest {
     }
 
     @Test
-    void deleteUserSubscription_notFound_throwsException() {
+    void deleteUserSubscription_throwsException_whenNotFound() {
         when(subscriptionRepository.deleteByIdAndUserId(ID, ID)).thenReturn(0);
 
         assertThrows(SubscriptionNotFoundException.class,
