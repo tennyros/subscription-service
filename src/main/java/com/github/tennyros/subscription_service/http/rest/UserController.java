@@ -82,6 +82,7 @@ public class UserController {
     public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
         log.debug("Fetching user with ID: {}", id);
         UserResponse response = userMapper.toResponse(userService.getUserById(id));
+        log.debug("Fetched user with ID: {}", id);
         return ResponseEntity.ok(response);
     }
 

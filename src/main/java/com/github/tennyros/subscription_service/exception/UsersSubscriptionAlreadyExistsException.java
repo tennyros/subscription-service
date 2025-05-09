@@ -1,8 +1,8 @@
 package com.github.tennyros.subscription_service.exception;
 
-public class SuchUsersSubscriptionAlreadyExists extends RuntimeException {
+public class UsersSubscriptionAlreadyExistsException extends RuntimeException {
 
-    public SuchUsersSubscriptionAlreadyExists(String message) {
+    public UsersSubscriptionAlreadyExistsException(String message) {
         super(message);
     }
 

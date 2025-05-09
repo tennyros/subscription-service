@@ -2,7 +2,7 @@ package com.github.tennyros.subscription_service.http.advice;
 
 import com.github.tennyros.subscription_service.exception.InvalidServiceException;
 import com.github.tennyros.subscription_service.exception.SubscriptionNotFoundException;
-import com.github.tennyros.subscription_service.exception.SuchUsersSubscriptionAlreadyExists;
+import com.github.tennyros.subscription_service.exception.UsersSubscriptionAlreadyExistsException;
 import com.github.tennyros.subscription_service.exception.UserAlreadyExistsException;
 import com.github.tennyros.subscription_service.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,14 +47,16 @@ public class ApiExceptionHandler {
         return buildProblemDetail(HttpStatus.CONFLICT, ex.getMessage(), "Conflict", request);
     }
 
-    @ExceptionHandler(SuchUsersSubscriptionAlreadyExists.class)
-    public ProblemDetail handleSubscriptionAlreadyExists(SuchUsersSubscriptionAlreadyExists ex, HttpServletRequest request) {
+    @ExceptionHandler(UsersSubscriptionAlreadyExistsException.class)
+    public ProblemDetail handleSubscriptionAlreadyExists(UsersSubscriptionAlreadyExistsException ex, HttpServletRequest request) {
         log.error("User already have such subscription: {}", ex.getMessage());
         return buildProblemDetail(HttpStatus.CONFLICT, ex.getMessage(), "Conflict", request);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException ex, HttpServletRequest request) {
+
+        log.error("Validation failed for request {}: {}", request.getRequestURI(), ex.getMessage());
 
         ProblemDetail problemDetail = buildProblemDetail(HttpStatus.BAD_REQUEST, "One or more fields are invalid",
                 "Validation failed", request);

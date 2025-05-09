@@ -6,9 +6,11 @@ import com.github.tennyros.subscription_service.model.User;
 import com.github.tennyros.subscription_service.repository.UserRepository;
 import com.github.tennyros.subscription_service.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -19,6 +21,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
+            log.warn("User with email {} already exists", user.getEmail());
             throw new UserAlreadyExistsException("User with such email already exists");
         }
         return userRepository.save(user);
@@ -42,6 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
+            log.warn("User with ID {} does not exist", id);
             throw new UserNotFoundException(id);
         }
         userRepository.deleteById(id);

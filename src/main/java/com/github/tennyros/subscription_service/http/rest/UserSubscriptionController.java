@@ -2,7 +2,6 @@ package com.github.tennyros.subscription_service.http.rest;
 
 import com.github.tennyros.subscription_service.dto.request.SubscriptionRequest;
 import com.github.tennyros.subscription_service.dto.response.SubscriptionResponse;
-import com.github.tennyros.subscription_service.dto.response.UserResponse;
 import com.github.tennyros.subscription_service.mapper.SubscriptionMapper;
 import com.github.tennyros.subscription_service.model.Subscription;
 import com.github.tennyros.subscription_service.service.SubscriptionService;
@@ -59,7 +58,7 @@ public class UserSubscriptionController {
     public ResponseEntity<SubscriptionResponse> addSubscription(@PathVariable Long userId,
                                                                 @RequestBody SubscriptionRequest request) {
 
-        log.info("Adding subscription for user ID: {}", userId);
+        log.info("Request to add subscription for user ID {}", userId);
         Subscription subscription = subscriptionService.addSubscription(userId, subscriptionMapper.toEntity(request));
         SubscriptionResponse response = subscriptionMapper.toResponse(subscription);
 
@@ -81,11 +80,11 @@ public class UserSubscriptionController {
     )
     @GetMapping
     public ResponseEntity<List<SubscriptionResponse>> getUserSubscriptions(@PathVariable Long userId) {
-        log.debug("Fetching subscriptions for user ID: {}", userId);
+        log.debug("Request to fetch subscriptions for user ID {}", userId);
         List<SubscriptionResponse> responses = subscriptionService.getUserSubscriptions(userId).stream()
                 .map(subscriptionMapper::toResponse)
                 .toList();
-
+        log.debug("Returning {} subscriptions for user ID {}", responses.size(), userId);
         return ResponseEntity.ok(responses);
     }
 
@@ -104,7 +103,7 @@ public class UserSubscriptionController {
             @PathVariable Long userId,
             @PathVariable Long subId) {
 
-        log.info("Deleting subscription ID: {} for user ID: {}", subId, userId);
+        log.info("Request to delete subscription ID {} for user ID {}", subId, userId);
         subscriptionService.deleteUserSubscription(userId, subId);
         return ResponseEntity.noContent().build();
     }
