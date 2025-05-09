@@ -3,7 +3,7 @@ package com.github.tennyros.subscription_service.service;
 import com.github.tennyros.subscription_service.dto.response.TopSubscriptions;
 import com.github.tennyros.subscription_service.exception.InvalidServiceException;
 import com.github.tennyros.subscription_service.exception.SubscriptionNotFoundException;
-import com.github.tennyros.subscription_service.exception.SuchUsersSubscriptionAlreadyExists;
+import com.github.tennyros.subscription_service.exception.UsersSubscriptionAlreadyExistsException;
 import com.github.tennyros.subscription_service.exception.UserNotFoundException;
 import com.github.tennyros.subscription_service.model.Subscription;
 import com.github.tennyros.subscription_service.model.User;
@@ -99,7 +99,7 @@ class SubscriptionServiceTest {
 
         when(userRepository.findById(ID)).thenReturn(Optional.of(user));
 
-        assertThrows(SuchUsersSubscriptionAlreadyExists.class, () -> {
+        assertThrows(UsersSubscriptionAlreadyExistsException.class, () -> {
             subscriptionService.addSubscription(ID, newSub);
         });
 
