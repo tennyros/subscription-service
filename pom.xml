@@ -14,7 +14,7 @@
   <artifactId>subscription-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>subscription-service</name>
-  <description>subscription-service</description>
+  <description>REST API microservice for managing users and their subscriptions</description>
 
   <properties>
     <java.version>17</java.version>

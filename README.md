@@ -14,7 +14,7 @@
 | Component                       | Version  | Purpose                                     |
 |---------------------------------|----------|---------------------------------------------|
 | Spring Boot                     | 3.4.5    | Backend framework                           |
-| Hibernate ORM (Spring Data JPA) | 6.6.13   | ORM framework for Java data handling        |
+| Spring Data JPA (Hibernate ORM) | 6.6.13   | ORM framework for Java data handling        |
 | Maven (wrapper)                 | 3.9.9    | Project build tool                          |
 | PostgreSQL                      | 17+      | Database management system                  |
 | Liquibase                       | 4.31.1   | Database migrations                         |
@@ -41,7 +41,6 @@ Source code structure (branch: dev):
 │   │   ├── mapper/                       # MapStruct mappers
 │   │   ├── model/                        # JPA entities
 │   │   ├── repository/                   # Spring Data JPA repositories
-│   │   │   └── projection/               # Projection interfaces
 │   │   └── service/                      # Business logic
 │   │       └── impl/                     # Service implementations
 │   └── resources/
