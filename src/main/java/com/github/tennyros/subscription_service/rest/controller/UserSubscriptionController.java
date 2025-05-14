@@ -1,9 +1,9 @@
-package com.github.tennyros.subscription_service.http.rest;
+package com.github.tennyros.subscription_service.rest.controller;
 
 import com.github.tennyros.subscription_service.dto.request.SubscriptionRequest;
 import com.github.tennyros.subscription_service.dto.response.SubscriptionResponse;
 import com.github.tennyros.subscription_service.mapper.SubscriptionMapper;
-import com.github.tennyros.subscription_service.model.Subscription;
+import com.github.tennyros.subscription_service.entity.Subscription;
 import com.github.tennyros.subscription_service.service.SubscriptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -99,12 +99,12 @@ public class UserSubscriptionController {
             }
     )
     @DeleteMapping("/{subId}")
-    public ResponseEntity<Void> deleteSubscription(
+    public ResponseEntity<Void> cancelSubscription(
             @PathVariable Long userId,
             @PathVariable Long subId) {
 
-        log.info("Request to delete subscription ID {} for user ID {}", subId, userId);
-        subscriptionService.deleteUserSubscription(userId, subId);
+        log.info("Request to cancel subscription ID {} for user ID {}", subId, userId);
+        subscriptionService.cancelUserSubscription(userId, subId);
         return ResponseEntity.noContent().build();
     }
 }

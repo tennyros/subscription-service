@@ -1,4 +1,4 @@
-package com.github.tennyros.subscription_service.http.rest;
+package com.github.tennyros.subscription_service.rest.controller;
 
 import com.github.tennyros.subscription_service.dto.response.TopSubscriptions;
 import com.github.tennyros.subscription_service.service.SubscriptionService;
@@ -39,6 +39,6 @@ public class SubscriptionController {
     @GetMapping("/top")
     public ResponseEntity<List<TopSubscriptions>> getTopSubscriptions() {
         log.info("Fetching top 3 popular subscriptions");
-        return ResponseEntity.ok(subscriptionService.getTop3Subs());
+        return ResponseEntity.ok(subscriptionService.getTop3Subscriptions());
     }
 }

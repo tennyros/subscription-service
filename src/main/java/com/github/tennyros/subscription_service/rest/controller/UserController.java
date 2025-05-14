@@ -1,9 +1,9 @@
-package com.github.tennyros.subscription_service.http.rest;
+package com.github.tennyros.subscription_service.rest.controller;
 
 import com.github.tennyros.subscription_service.dto.request.UserRequest;
 import com.github.tennyros.subscription_service.dto.response.UserResponse;
 import com.github.tennyros.subscription_service.mapper.UserMapper;
-import com.github.tennyros.subscription_service.model.User;
+import com.github.tennyros.subscription_service.entity.User;
 import com.github.tennyros.subscription_service.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

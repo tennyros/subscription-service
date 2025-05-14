@@ -1,4 +1,4 @@
-package com.github.tennyros.subscription_service.http.advice;
+package com.github.tennyros.subscription_service.rest.advice;
 
 import com.github.tennyros.subscription_service.exception.InvalidServiceException;
 import com.github.tennyros.subscription_service.exception.SubscriptionNotFoundException;
