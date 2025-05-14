@@ -1,7 +1,7 @@
 package com.github.tennyros.subscription_service.service;
 
 import com.github.tennyros.subscription_service.dto.response.TopSubscriptions;
-import com.github.tennyros.subscription_service.model.Subscription;
+import com.github.tennyros.subscription_service.entity.Subscription;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ public interface SubscriptionService {
 
     List<Subscription> getUserSubscriptions(Long userId);
 
-    void deleteUserSubscription(Long userId, Long subscriptionId);
+    void cancelUserSubscription(Long userId, Long subscriptionId);
 
-    List<TopSubscriptions> getTop3Subs();
+    List<TopSubscriptions> getTop3Subscriptions();
 
 }

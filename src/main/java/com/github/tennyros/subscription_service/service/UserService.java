@@ -1,6 +1,6 @@
 package com.github.tennyros.subscription_service.service;
 
-import com.github.tennyros.subscription_service.model.User;
+import com.github.tennyros.subscription_service.entity.User;
 
 public interface UserService {
 
