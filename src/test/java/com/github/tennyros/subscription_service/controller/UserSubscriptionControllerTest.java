@@ -3,9 +3,9 @@ package com.github.tennyros.subscription_service.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tennyros.subscription_service.dto.request.SubscriptionRequest;
 import com.github.tennyros.subscription_service.dto.response.SubscriptionResponse;
-import com.github.tennyros.subscription_service.http.rest.UserSubscriptionController;
+import com.github.tennyros.subscription_service.rest.controller.UserSubscriptionController;
 import com.github.tennyros.subscription_service.mapper.SubscriptionMapper;
-import com.github.tennyros.subscription_service.model.Subscription;
+import com.github.tennyros.subscription_service.entity.Subscription;
 import com.github.tennyros.subscription_service.service.SubscriptionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +93,6 @@ class UserSubscriptionControllerTest {
         mockMvc.perform(delete("/api/v1/users/{userId}/subscriptions/{subId}", ID, subId))
                 .andExpect(status().isNoContent());
 
-        verify(subscriptionService).deleteUserSubscription(ID, subId);
+        verify(subscriptionService).cancelUserSubscription(ID, subId);
     }
 }

@@ -1,7 +1,7 @@
 package com.github.tennyros.subscription_service.controller;
 
 import com.github.tennyros.subscription_service.dto.response.TopSubscriptions;
-import com.github.tennyros.subscription_service.http.rest.SubscriptionController;
+import com.github.tennyros.subscription_service.rest.controller.SubscriptionController;
 import com.github.tennyros.subscription_service.service.SubscriptionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +35,7 @@ class SubscriptionControllerTest {
                 new TopSubscriptions("Spotify", 10L),
                 new TopSubscriptions("Netflix", 7L)
         );
-        when(subscriptionService.getTop3Subs()).thenReturn(topSubs);
+        when(subscriptionService.getTop3Subscriptions()).thenReturn(topSubs);
 
         ResponseEntity<List<TopSubscriptions>> response = subscriptionController.getTopSubscriptions();
 
@@ -43,6 +43,6 @@ class SubscriptionControllerTest {
         assertNotNull(response.getBody());
         assertEquals(3, response.getBody().size());
         assertEquals("YouTube", response.getBody().get(0).serviceName());
-        verify(subscriptionService, times(1)).getTop3Subs();
+        verify(subscriptionService, times(1)).getTop3Subscriptions();
     }
 }

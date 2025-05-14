@@ -2,7 +2,7 @@ package com.github.tennyros.subscription_service.service;
 
 import com.github.tennyros.subscription_service.exception.UserAlreadyExistsException;
 import com.github.tennyros.subscription_service.exception.UserNotFoundException;
-import com.github.tennyros.subscription_service.model.User;
+import com.github.tennyros.subscription_service.entity.User;
 import com.github.tennyros.subscription_service.repository.UserRepository;
 import com.github.tennyros.subscription_service.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;

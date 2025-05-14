@@ -5,8 +5,8 @@ import com.github.tennyros.subscription_service.exception.InvalidServiceExceptio
 import com.github.tennyros.subscription_service.exception.SubscriptionNotFoundException;
 import com.github.tennyros.subscription_service.exception.UsersSubscriptionAlreadyExistsException;
 import com.github.tennyros.subscription_service.exception.UserNotFoundException;
-import com.github.tennyros.subscription_service.model.Subscription;
-import com.github.tennyros.subscription_service.model.User;
+import com.github.tennyros.subscription_service.entity.Subscription;
+import com.github.tennyros.subscription_service.entity.User;
 import com.github.tennyros.subscription_service.repository.SubscriptionRepository;
 import com.github.tennyros.subscription_service.repository.UserRepository;
 import com.github.tennyros.subscription_service.service.impl.SubscriptionServiceImpl;
@@ -125,24 +125,24 @@ class SubscriptionServiceTest {
         when(userRepository.existsById(ID)).thenReturn(true);
         when(subscriptionRepository.deleteByIdAndUserId(ID, ID)).thenReturn(1);
 
-        subscriptionService.deleteUserSubscription(ID, ID);
+        subscriptionService.cancelUserSubscription(ID, ID);
 
         verify(subscriptionRepository).deleteByIdAndUserId(ID, ID);
     }
 
     @Test
-    void deleteUserSubscription_throwsException_whenNotFound() {
+    void cancelUserSubscription_throwsException_whenNotFound() {
         when(userRepository.existsById(ID)).thenReturn(true);
         when(subscriptionRepository.deleteByIdAndUserId(ID, ID)).thenReturn(0);
 
         assertThrows(SubscriptionNotFoundException.class,
-                () -> subscriptionService.deleteUserSubscription(ID, ID));
+                () -> subscriptionService.cancelUserSubscription(ID, ID));
 
         verify(subscriptionRepository).deleteByIdAndUserId(ID, ID);
     }
 
     @Test
-    void getTop3Subs_returnsList() {
+    void getTop3Subscriptions_returnsList() {
         List<TopSubscriptions> projections = List.of(
                 new TopSubscriptions("Netflix", 100L),
                 new TopSubscriptions("YouTube Premium", 50L)
@@ -150,7 +150,7 @@ class SubscriptionServiceTest {
 
         when(subscriptionRepository.findTop3PopularSubscriptions()).thenReturn(projections);
 
-        List<TopSubscriptions> result = subscriptionService.getTop3Subs();
+        List<TopSubscriptions> result = subscriptionService.getTop3Subscriptions();
 
         assertEquals(2, result.size());
         assertEquals("Netflix", result.get(0).serviceName());
