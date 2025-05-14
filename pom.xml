@@ -140,7 +140,7 @@
         <configuration>
           <excludes>
             <exclude>**/SubscriptionServiceApplication.class</exclude>
-            <exclude>**/model/**</exclude>
+            <exclude>**/entity/**</exclude>
             <exclude>**/dto/**</exclude>
           </excludes>
         </configuration>
