@@ -2,7 +2,7 @@ package com.github.tennyros.subscription_service.mapper;
 
 import com.github.tennyros.subscription_service.dto.request.SubscriptionRequest;
 import com.github.tennyros.subscription_service.dto.response.SubscriptionResponse;
-import com.github.tennyros.subscription_service.model.Subscription;
+import com.github.tennyros.subscription_service.entity.Subscription;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;

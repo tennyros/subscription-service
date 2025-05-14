@@ -1,7 +1,7 @@
 package com.github.tennyros.subscription_service.repository;
 
 import com.github.tennyros.subscription_service.dto.response.TopSubscriptions;
-import com.github.tennyros.subscription_service.model.Subscription;
+import com.github.tennyros.subscription_service.entity.Subscription;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

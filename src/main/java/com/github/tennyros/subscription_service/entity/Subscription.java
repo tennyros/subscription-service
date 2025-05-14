@@ -1,4 +1,4 @@
-package com.github.tennyros.subscription_service.model;
+package com.github.tennyros.subscription_service.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,9 +51,7 @@ public class Subscription {
         if (this == o) return true;
         if (o == null) return false;
 
-        if (!(o instanceof Subscription subscription)) {
-            return false;
-        }
+        if (!(o instanceof Subscription subscription)) return false;
 
         Class<?> oEffectiveClass = (o instanceof HibernateProxy hibernateProxy)
                 ? hibernateProxy.getHibernateLazyInitializer()
